@@ -4,8 +4,22 @@ import pandas as pd
 import numpy as np
 import joblib
 
-#load model
-model = joblib.load("iris_model.joblib")
+from sklearn.datasets import load_iris
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LogisticRegression
+
+#load iris dataset from sklearn
+iris = load_iris()
+
+X = iris.data
+y = iris.target
+
+#split into train and test
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+
+#train logistic regression model
+model = LogisticRegression()
+model.fit(X_train, y_train)
 
 #title
 st.title("Iris Flower Prediction")
